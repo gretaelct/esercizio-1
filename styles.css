@@ -1,0 +1,108 @@
+ :root {
+  color-scheme: dark;
+  --bg: #000000;
+  --star: #ffe64d;
+  --star-shadow: #f0c800;
+  --accent: #f9f9f9;
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+  background: var(--bg);
+  color: var(--accent);
+}
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+.star-button {
+  width: 210px;
+  height: 210px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: transform .16s ease-out;
+}
+.star-button:hover {
+  transform: scale(1.05);
+}
+.star-button:active {
+  transform: scale(0.98);
+}
+.star-button.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes star-pop {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  60% { transform: scale(1.4) rotate(15deg); opacity: 1; }
+  100% { transform: scale(0) rotate(30deg); opacity: 0; }
+}
+.star-button.popped {
+  animation: star-pop .5s ease-in forwards;
+}
+.star-svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--star);
+  stroke: #ffe50f;
+  stroke-width: 5;
+  filter: drop-shadow(0 0 20px rgba(255, 230, 93, 0.7));
+}
+.effect-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle,
+.confetti,
+.spark {
+  position: absolute;
+  pointer-events: none;
+  transform-origin: center;
+}
+.particle {
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.65);
+}
+.confetti {
+  width: 16px;
+  height: 10px;
+  border-radius: 20%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.spark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 70%);
+}
+@keyframes confetti-fall {
+  0% { opacity: 0; transform: translateY(-20px) rotate(0deg); }
+  10% { opacity: 1; }
+  100% { opacity: 0.9; transform: translateY(420px) rotate(720deg); }
+}
+@keyframes puff {
+  0% { opacity: 0.85; transform: scale(0.4); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+@keyframes spark-fly {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.25); }
+}
